@@ -1,3 +1,6 @@
+let fromCurrency = "usd";
+let toCurrency = "inr";
+
 // adding more currency options 
 const dropdown = document.querySelectorAll(".dropdown select");
 // there are 2 objects in dropdown class because we have created 2 'select' tags in dropdown tag('from' and 'to')
@@ -16,12 +19,9 @@ const updateExchangeRate=async()=>{
 
     let data = await p1.json();
     let convoRate = data[fromCurrency][toCurrency];
-    document.querySelector("#result").innerText = document.querySelector("#input").value * convoRate;
+    document.querySelector("#result").innerText = document.querySelector("#input").value * convoRate+" "+toCurrency.toUpperCase();
     // innerText does not work with input tag
 }
-
-let fromCurrency = "usd";
-let toCurrency = "inr";
 
 window.addEventListener("load", async ()=>{
 
