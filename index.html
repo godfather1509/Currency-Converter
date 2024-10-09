@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Exchange</title>
+    <link href="style.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div id="parent">
+        <form>
+            <div class="amount">
+                <p class="title"><b>Enter amount</b></p>
+                <input value="100" id="input">
+            </div>
+            <div class="dropdown">
+                <div class="from">
+                    <p class="header">From</p>
+                    <div class="select-container">
+                        <img src="https://flagsapi.com/US/flat/64.png">
+                        <select name="from"></select>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                <div class="to">
+                    <p class="header">To</p>
+                    <div class="select-container">
+                        <img src="https://flagsapi.com/IN/flat/64.png">
+                        <select name="to"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="amount">
+                <p class="title"><b>Result</b></p>
+                <p id="result">-</p>
+            </div>
+            <button id="btn">Get Exchange Rate</button>
+        </form>
+    </div>
+</body>
+<script src="codes.js"></script>
+<!-- by keeping 'codes.js' file before 'currency_exchange.js' file we can access the data of codes.js in main js file -->
+<script src="currency_exchange.js"></script>
+
+</html>
