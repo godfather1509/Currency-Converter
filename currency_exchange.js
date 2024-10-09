@@ -1,6 +1,34 @@
 // adding more currency options 
 const dropdown = document.querySelectorAll(".dropdown select");
 // there are 2 objects in dropdown class because we have created 2 'select' tags in dropdown tag('from' and 'to')
+const updateExchangeRate=async()=>{
+    let p1;
+    try {
+        let URL = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${fromCurrency}.json`
+        // editing url to change from currency at run time 
+        p1 = await fetch(URL);
+    }
+    catch (err) {
+        let URL2 = `https://latest.currency-api.pages.dev/v1/currencies/${fromCurrency}.json`
+        p1 = await fetch(URL2);
+    }
+    // creating fall back in case 1st URL is not working 
+
+    let data = await p1.json();
+    let convoRate = data[fromCurrency][toCurrency];
+    document.querySelector("#result").innerText = document.querySelector("#input").value * convoRate;
+    // innerText does not work with input tag
+}
+
+let fromCurrency = "usd";
+let toCurrency = "inr";
+
+window.addEventListener("load", async ()=>{
+
+    updateExchangeRate();
+
+})
+
 for (let select of dropdown) {
     for (currCode in countryList) {
         let newOption = document.createElement("option");
@@ -29,8 +57,7 @@ for (let select of dropdown) {
         // whenever a change is detected updateFlag() function will be called 
     )
 }
-let fromCurrency = "usd";
-let toCurrency = "inr";
+
 const updateFlag = (element) => {
     let currCode = element.value;
     // getting new currency code 
@@ -56,24 +83,7 @@ async function currencyConvert(event) {
     only prevent reloding of page after button click because function is being called after the form is submitted 
     */
     // on clicking button page will not reload 
-    let p1;
-    try {
-        let URL = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${fromCurrency}.json`
-        // editing url to change from currency at run time 
-        p1 = await fetch(URL);
-    }
-    catch (err) {
-        let URL2 = `https://latest.currency-api.pages.dev/v1/currencies/${fromCurrency}.json`
-        p1 = await fetch(URL2);
-    }
-    // creating fall back in case 1 URL is not working 
-
-    let data = await p1.json();
-    let convoRate = data[fromCurrency][toCurrency];
-    document.querySelector("#result").innerText = document.querySelector("#input").value * convoRate;
-    // innerText does not work with input tag
-    console.log(convoRate);
-}
-
-let btn = document.querySelector("#btn");
+    updateExchangeRate();
+    
+}let btn = document.querySelector("#btn");
 btn.addEventListener("click", currencyConvert);
