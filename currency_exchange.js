@@ -4,7 +4,7 @@ let toCurrency = "inr";
 // adding more currency options 
 const dropdown = document.querySelectorAll(".dropdown select");
 // there are 2 objects in dropdown class because we have created 2 'select' tags in dropdown tag('from' and 'to')
-const updateExchangeRate=async()=>{
+const updateExchangeRate = async () => {
     let p1;
     try {
         let URL = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${fromCurrency}.json`
@@ -19,11 +19,11 @@ const updateExchangeRate=async()=>{
 
     let data = await p1.json();
     let convoRate = data[fromCurrency][toCurrency];
-    document.querySelector("#result").innerText = document.querySelector("#input").value * convoRate+" "+toCurrency.toUpperCase();
+    document.querySelector("#result").innerText = document.querySelector("#input").value * convoRate + " " + toCurrency.toUpperCase();
     // innerText does not work with input tag
 }
 
-window.addEventListener("load", async ()=>{
+window.addEventListener("load", async () => {
 
     updateExchangeRate();
 
@@ -84,6 +84,6 @@ async function currencyConvert(event) {
     */
     // on clicking button page will not reload 
     updateExchangeRate();
-    
-}let btn = document.querySelector("#btn");
+
+} let btn = document.querySelector("#btn");
 btn.addEventListener("click", currencyConvert);
